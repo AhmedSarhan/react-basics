@@ -1,35 +1,58 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import styles from "./index.module.css";
 
+const reducerFn = (prevState, newState) => {
+  return {
+    ...prevState,
+    ...newState,
+  };
+};
 export const StateForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useReducer(reducerFn, {
+    name: "",
+    email: "",
+    age: 0,
+    password: "",
+  });
 
+  //   const [formData, setFormData] = useState({
+  //     name: "",
+  //     email: "",
+  //     age: 0,
+  //     password: "",
+  //   });
   const submitHandler = (e) => {
     e.preventDefault();
     console.log({
-      name,
-      email,
-      age,
-      password,
+      name: formData.name,
+      email: formData.email,
+      age: formData.age,
+      password: formData.password,
+    });
+  };
+
+  const changeHandler = (e) => {
+    // setFormData((prevData) => ({
+    //   ...prevData,
+    //   [e.target.name]: e.target.value,
+    // }));
+    setFormData({
+      [e.target.name]: e.target.value,
     });
   };
   return (
     <>
-      {/* <h2>Enter UseRef</h2> */}
       <form onSubmit={submitHandler}>
         <div className={styles["form-group"]}>
           <label htmlFor="name">username</label>
           <input
             type="text"
             name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formData.name}
+            onChange={changeHandler}
           />
-          <h3>Name is: {name}</h3>
-          {name.length <= 5 && (
+          <h3>Name is: {formData.name}</h3>
+          {formData.name.length <= 5 && (
             <p style={{ color: "red" }}>Name is too short</p>
           )}
         </div>
@@ -38,8 +61,8 @@ export const StateForm = () => {
           <input
             type="text"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={changeHandler}
           />
           {name.current?.value?.length <= 5 && (
             <p style={{ color: "red" }}>Name is too short</p>
@@ -52,8 +75,8 @@ export const StateForm = () => {
             min={1}
             max={200}
             name="age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
+            value={formData.age}
+            onChange={changeHandler}
           />
         </div>
         <div className={styles["form-group"]}>
@@ -61,8 +84,8 @@ export const StateForm = () => {
           <input
             type="password"
             name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formData.password}
+            onChange={changeHandler}
           />
         </div>
 

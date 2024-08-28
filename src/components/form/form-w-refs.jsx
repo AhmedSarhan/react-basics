@@ -17,7 +17,6 @@ const RefForms = () => {
   };
   return (
     <>
-      {/* <h2>Enter UseRef</h2> */}
       <form onSubmit={submitHandler}>
         <div className={styles["form-group"]}>
           <label htmlFor="name">username</label>
