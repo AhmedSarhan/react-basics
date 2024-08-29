@@ -8,6 +8,17 @@ export const TioCalculator = ({ setTipData }) => {
   const [peopleCount, setPeopleCount] = useState(0);
   const [currentTip, setCurrentTip] = useState(15);
 
+  const handleReset = () => {
+    setBillAmount(0);
+    setPeopleCount(0);
+    setCurrentTip(15);
+    setTipData({
+      billAmount: Number(0),
+      peopleCount: Number(0),
+      currentTip: Number(15),
+    });
+  };
+
   const calculateHandler = (e) => {
     e.preventDefault();
     console.log("billAmount:", billAmount);
@@ -60,9 +71,14 @@ export const TioCalculator = ({ setTipData }) => {
         />
       </div>
 
-      <button type="submit" className={styles.calculateBtn}>
-        Calculate
-      </button>
+      <div className={styles.actions}>
+        <button type="submit" className={styles.calculateBtn}>
+          Calculate
+        </button>
+        <button type="button" onClick={handleReset} className={styles.reset}>
+          Reset
+        </button>
+      </div>
     </form>
   );
 };

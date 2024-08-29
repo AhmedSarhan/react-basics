@@ -42,7 +42,6 @@ export const TipCalculatorResult = ({ tipData }) => {
         </div>
         <div>{tipPerPerson}&nbsp;EGP</div>
       </div>
-      <button className={styles.reset}>RESET</button>
     </div>
   );
 };
