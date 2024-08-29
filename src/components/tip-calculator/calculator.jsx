@@ -12,11 +12,22 @@ export const Calculator = () => {
         <div className={styles.row}>
           <p>Select Tip</p>
           <ul>
-            <li>5%</li>
-            <li>10%</li>
-            <li className={styles.select}>15%</li>
-            <li>25%</li>
-            <li>50%</li>
+            <li>
+              <button>5%</button>
+            </li>
+            <li>
+              <button>10%</button>
+            </li>
+            <li className={styles.select}>
+              <button>15%</button>
+            </li>
+            <li>
+              <button>25%</button>
+            </li>
+            <li>
+              <button>50%</button>
+            </li>
+
             <input type="number" placeholder="Custom..." />
           </ul>
         </div>
@@ -24,6 +35,9 @@ export const Calculator = () => {
           <p>Number of People</p>
           <input type="number" />
         </div>
+        <button type="submit" className={styles.calculateBtn}>
+          Calculate
+        </button>
       </div>
       {/* Tip Display */}
       <div className={styles.tipDisplay}>
