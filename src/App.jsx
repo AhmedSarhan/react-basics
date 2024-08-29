@@ -1,10 +1,10 @@
 import "./App.css";
-import { FormComponent } from "./components/form";
+import { Calculator } from "./components/tip-calculator/calculator";
 
 function App() {
   return (
     <>
-      <FormComponent />
+      <Calculator />
     </>
   );
 }

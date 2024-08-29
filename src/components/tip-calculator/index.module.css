@@ -1,0 +1,145 @@
+.container{
+    max-width: 800px;
+    margin: auto;
+    margin-top: 50px;
+    display: grid;
+    background-color: #fff;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px 0px rgba(109, 95, 95, 0.5);
+}
+
+.tipForm{
+    margin-bottom: 15px;
+}
+
+.tipForm .row{
+    width: calc(100% - 50px);
+    margin: auto;
+}
+
+.row p{
+    margin: 5px;
+    margin-top: 15px;
+    text-align: left;
+    position: relative;
+    font-size: 14px;
+}
+
+.row span{
+    position: absolute;
+    padding: 10px 0px 0px 10px;
+}
+
+.row input{
+    width: calc(100% - 25px);
+    font-size: 1rem;
+    padding: 6px 10px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    text-align: right;
+}
+
+.row ul{
+    padding-inline-start: 0px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5px;
+    width: 100%;
+    margin-top: 0;
+}
+
+.row ul li{
+    list-style-type: none;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #1d9bf0;
+    color: white;
+    font-size: 15px;
+    transition: 0.5s background-color ease-in-out;
+}
+
+.row ul .select{
+    background-color: #0a9415;
+}
+
+.row ul li:hover{
+    background-color: #068519;
+}
+
+.tipDisplay{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #2395e2;
+    color: white;
+}
+
+.reset{
+    position: relative;
+    border: none;
+    padding: 10px;
+    outline: none;
+    background-color: #fff;
+    color:#1d9bf0;
+    /* border: 2px solid #1d9bf0; */
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.5s all;
+}
+
+.reset:hover{
+    color: white;
+    background-color: #2395e2;
+    box-shadow: 0px 1px 2px 0px rgba(109, 95, 95, 0.25);
+
+}
+
+.tipDisplay .row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tipDisplay .row div:last-child{
+    font-size: 20px;
+}
+
+.tipDisplay .row p:last-child{
+    margin: 0px 0px 15px 5px;
+    font-size: 12px;
+}
+
+.tipDisplay .row p:first-child{
+    font-size: 16px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0; /* This is important for Firefox */
+}
+
+@media only screen and (max-width : 600px){
+    .container{
+        grid-template-columns : 1fr;
+    }
+}
