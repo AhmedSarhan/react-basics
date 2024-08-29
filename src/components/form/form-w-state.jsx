@@ -1,18 +1,26 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import styles from "./index.module.css";
 
+const reducerFn = (prevState, newState) => {
+  return {
+    ...prevState,
+    ...newState,
+  };
+};
 export const StateForm = () => {
-  //   const [name, setName] = useState("");
-  //   const [email, setEmail] = useState("");
-  //   const [age, setAge] = useState("");
-  //   const [password, setPassword] = useState("");
-
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useReducer(reducerFn, {
     name: "",
     email: "",
     age: 0,
     password: "",
   });
+
+  //   const [formData, setFormData] = useState({
+  //     name: "",
+  //     email: "",
+  //     age: 0,
+  //     password: "",
+  //   });
   const submitHandler = (e) => {
     e.preventDefault();
     console.log({
@@ -24,10 +32,13 @@ export const StateForm = () => {
   };
 
   const changeHandler = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
+    // setFormData((prevData) => ({
+    //   ...prevData,
+    //   [e.target.name]: e.target.value,
+    // }));
+    setFormData({
       [e.target.name]: e.target.value,
-    }));
+    });
   };
   return (
     <>
