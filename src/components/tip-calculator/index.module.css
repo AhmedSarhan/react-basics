@@ -80,6 +80,12 @@
 
 
 }
+
+
+.row ul li button:focus{
+    outline: none;
+}
+
 .row ul li.select button{
     background-color: #0a9415;
 }
@@ -100,26 +106,7 @@
     color: white;
 }
 
-.reset{
-    position: relative;
-    border: none;
-    padding: 10px;
-    outline: none;
-    background-color: #fff;
-    color:#1d9bf0;
-    /* border: 2px solid #1d9bf0; */
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.5s all;
-}
 
-.reset:hover{
-    color: white;
-    background-color: #2395e2;
-    box-shadow: 0px 1px 2px 0px rgba(109, 95, 95, 0.25);
-
-}
 
 .tipDisplay .row{
     display: flex;
@@ -139,6 +126,13 @@
 .tipDisplay .row p:first-child{
     font-size: 16px;
 }
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 .calculateBtn {
     background-color: #1d9bf0;
     color: white;
@@ -151,7 +145,31 @@
     padding: 10px;
     border-radius: 4px;
     margin-top: 20px;
-    width: 50%;
+    width: 45%;
+
+}
+
+
+.reset{
+    background-color: #fff;
+    color: #1d9bf0;
+    border: 1px solid #2395e2;
+    box-shadow: 0px 1px 2px 0px rgba(109, 95, 95, 0.25);
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.5s background-color ease-in-out;
+    /* width: 100%; */
+    /* height: 100%; */
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    width: 45%;
+}
+
+.reset:hover{
+    color: white;
+    background-color: #2395e2;
+
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
