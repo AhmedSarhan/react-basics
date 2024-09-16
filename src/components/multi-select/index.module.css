@@ -1,0 +1,74 @@
+.wrapper {
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    box-shadow: none;
+    padding: 10px;
+    border-radius: 6px;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    transition: all 0.2s linear 0.1s;
+    border: 1px solid #ddd;
+  }
+  
+  .wrapper.raised {
+    /* box-shadow: 6px 5px 22px -8px rgba(0, 0, 0, 0.76); */
+  }
+  
+  .wrapper:hover {
+    cursor: pointer;
+  }
+  
+  .selectedItemsContainer {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+  }
+  
+  .selectIcon {
+    display: inline-block;
+    width: 20px;
+  }
+  
+  .dropDown {
+    position: absolute;
+    left: 0px;
+    width: inherit;
+    border-radius: 6px;
+    padding: 6px;
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  .dropDown.opened {
+    visibility: visible;
+    opacity: 1;
+    /* top: 28px; */
+    background: white;
+  }
+  
+  .dropDown.raised {
+    box-shadow: 6px 5px 22px -8px rgba(0, 0, 0, 0.76);
+  }
+  
+  .dropDown li {
+    list-style: none;
+    padding: 8px;
+  }
+  
+  .dropDown li:hover {
+    background-color: papayawhip;
+  }
+  
+  .chip {
+    background: #e8f7f6;
+    padding: 6px;
+    border-radius: 4px;
+    margin: 4px;
+  }
+  
+  .chip span {
+    margin-right: 8px;
+  }
+  

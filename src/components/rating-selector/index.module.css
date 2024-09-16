@@ -1,0 +1,15 @@
+.ratingContainer {
+    display: flex;
+    gap: 8px;
+    cursor: pointer;
+  }
+  
+  .star {
+    color: #e4e5e9; /* Grey color for unselected stars */
+    transition: color 0.2s;
+  }
+  
+  .starSelected {
+    color: #ffc107; /* Yellow color for selected stars */
+  }
+  
