@@ -42,6 +42,7 @@ const RatingSelector = ({ totalStars = 5, closeHandler, updateRating }) => {
             onMouseEnter={() => handleMouseEnter(starIndex)}
             onMouseLeave={handleMouseLeave}
             fontSize="24px"
+            type="button"
           />
         );
       })}
@@ -50,12 +51,14 @@ const RatingSelector = ({ totalStars = 5, closeHandler, updateRating }) => {
         color="#27ae60"
         onClick={() => updateRating(rating)}
         fontSize="24px"
+        type="button"
       />
       <FontAwesomeIcon
         icon={faClose}
         color="#e74c3c"
         onClick={cancelHandler}
         fontSize="24px"
+        type="button"
       />
     </div>
   );

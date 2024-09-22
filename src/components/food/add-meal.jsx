@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import { MultiSelect } from "../multi-select";
 import styles from "./index.module.css";
+import { addRecipe } from "../../api/add-recipe";
 
 const tags = [
   { id: 1, value: "Vegetarian" },
@@ -26,10 +27,17 @@ export const AddMeal = ({ onMealAddition }) => {
     caloriesPerServing: "",
   });
 
-  const addMealHandler = (e) => {
+  const addMealHandler = async(e) => {
     e.preventDefault();
-    console.log("formData", formData);
-    onMealAddition(formData);
+   const response = await addRecipe({
+      ...formData,
+      tags: formData.tags.map((tag) => tag.value)
+    })
+    onMealAddition({
+      ...formData,
+      tags: formData.tags.map((tag) => tag.value),
+      id: response.data.name,
+    });
   };
   return (
     <form className={styles["form-container"]} onSubmit={addMealHandler}>
