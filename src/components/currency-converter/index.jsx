@@ -4,14 +4,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./index.module.css";
+import { fetchCurrencies } from "../../api/fetch-currencies";
+import { convertCurrencies } from "../../api/conver-currencies";
 export const CurrencyConverter = () => {
   const [currencies, setCurrencies] = useState([]);
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("INR");
   const [amount, setAmount] = useState(1);
+  const [input, setInput] = useState(0);
   const [output, setOutput] = useState(0);
 
-  
+  const getCurrenciesHandler = async () => {
+    const response = await fetchCurrencies();
+    setCurrencies(response);
+  }
+  useEffect(() => {
+    getCurrenciesHandler()
+  }, [])
+
+  const convertCurrenciesHandler = async () => {
+    const convertedAmount = await convertCurrencies(fromCurrency, toCurrency, amount);
+    setInput(amount);
+    setOutput(convertedAmount);
+
+  }
   return (
     <>
       <div className={styles.container}>
@@ -29,14 +45,14 @@ export const CurrencyConverter = () => {
             <h3>From</h3>
             <select
               onChange={(e) => {
-                setFromCurrency(e.value);
+                setFromCurrency(e.target.value);
               }}
               value={fromCurrency}
               placeholder="From"
             >
               {currencies.map((curency) => (
-                <option key={curency} value={curency}>
-                  {curency}
+                <option key={curency.code} value={curency.code}>
+                  {`${curency.name} (${curency.symbol})`}
                 </option>
               ))}
             </select>
@@ -54,30 +70,32 @@ export const CurrencyConverter = () => {
             <h3>To</h3>
             <select
               onChange={(e) => {
-                setToCurrency(e.value);
+                setToCurrency(e.target.value);
               }}
               value={toCurrency}
               placeholder="To"
             >
               {currencies.map((curency) => (
-                <option key={curency} value={curency}>
-                  {curency}
+                <option key={curency.code} value={curency.code}>
+                  {`${curency.name} (${curency.symbol})`}
                 </option>
               ))}
             </select>
           </div>
         </div>
-        <button
-          onClick={() => {
-            convert();
-          }}
-        >
-          Convert
-        </button>
+        <button onClick={convertCurrenciesHandler}>Convert</button>
       </div>
       <div className={styles.result}>
         <h2>Converted Amount:</h2>
-        <p>{amount + " " + fromCurrency + " = " + output.toFixed(2) + " " + toCurrency}</p>
+        <p>
+          {input +
+            " " +
+            fromCurrency +
+            " = " +
+            output.toFixed(2) +
+            " " +
+            toCurrency}
+        </p>
       </div>
     </>
   );
