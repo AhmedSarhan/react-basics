@@ -29,7 +29,7 @@ export const CurrencyConverter = () => {
             <h3>From</h3>
             <select
               onChange={(e) => {
-                setFromCurrency(e.value);
+                setFromCurrency(e.target.value);
               }}
               value={fromCurrency}
               placeholder="From"
@@ -54,7 +54,7 @@ export const CurrencyConverter = () => {
             <h3>To</h3>
             <select
               onChange={(e) => {
-                setToCurrency(e.value);
+                setToCurrency(e.target.value);
               }}
               value={toCurrency}
               placeholder="To"
@@ -77,7 +77,15 @@ export const CurrencyConverter = () => {
       </div>
       <div className={styles.result}>
         <h2>Converted Amount:</h2>
-        <p>{amount + " " + fromCurrency + " = " + output.toFixed(2) + " " + toCurrency}</p>
+        <p>
+          {amount +
+            " " +
+            fromCurrency +
+            " = " +
+            output.toFixed(2) +
+            " " +
+            toCurrency}
+        </p>{" "}
       </div>
     </>
   );
