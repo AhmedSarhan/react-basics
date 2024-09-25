@@ -1,33 +1,51 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import Axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./index.module.css";
-import { fetchCurrencies } from "../../api/fetch-currencies";
-import { convertCurrencies } from "../../api/conver-currencies";
+import { getCurrencies } from "../../api/get-currencies";
+import { convertCurrencies } from "../../api/convert-currencies";
+
+const reducerFn = (prevState, newState) => {
+  return { ...prevState, ...newState };
+};
 export const CurrencyConverter = () => {
   const [currencies, setCurrencies] = useState([]);
   const [fromCurrency, setFromCurrency] = useState("USD");
-  const [toCurrency, setToCurrency] = useState("INR");
+  const [toCurrency, setToCurrency] = useState("CHF");
   const [amount, setAmount] = useState(1);
-  const [input, setInput] = useState(0);
-  const [output, setOutput] = useState(0);
+  // const [output, setOutput] = useState(0);
 
+  const [displayData, setDisplayData] = useReducer(reducerFn, {
+    fromCurrency,
+    toCurrency,
+    input: 0,
+    output: 0,
+  });
   const getCurrenciesHandler = async () => {
-    const response = await fetchCurrencies();
-    setCurrencies(response);
-  }
+    const apiCurrencies = await getCurrencies();
+    setCurrencies(apiCurrencies);
+  };
+
   useEffect(() => {
-    getCurrenciesHandler()
-  }, [])
+    getCurrenciesHandler();
+  }, []);
 
   const convertCurrenciesHandler = async () => {
-    const convertedAmount = await convertCurrencies(fromCurrency, toCurrency, amount);
-    setInput(amount);
-    setOutput(convertedAmount);
+    const convertedCurrency = await convertCurrencies(
+      fromCurrency,
+      toCurrency,
+      amount
+    );
+    setDisplayData({
+      fromCurrency,
+      toCurrency,
+      input: amount,
+      output: convertedCurrency,
+    });
+  };
 
-  }
   return (
     <>
       <div className={styles.container}>
@@ -52,7 +70,7 @@ export const CurrencyConverter = () => {
             >
               {currencies.map((curency) => (
                 <option key={curency.code} value={curency.code}>
-                  {`${curency.name} (${curency.symbol})`}
+                  {`${curency.name} (${curency.symbol_native})`}
                 </option>
               ))}
             </select>
@@ -77,7 +95,8 @@ export const CurrencyConverter = () => {
             >
               {currencies.map((curency) => (
                 <option key={curency.code} value={curency.code}>
-                  {`${curency.name} (${curency.symbol})`}
+                  {/* {`${curency.name} (${curency.symbol_native})`} */}
+                  {curency.name} ({curency.symbol_native})
                 </option>
               ))}
             </select>
@@ -88,14 +107,14 @@ export const CurrencyConverter = () => {
       <div className={styles.result}>
         <h2>Converted Amount:</h2>
         <p>
-          {input +
+          {displayData.input +
             " " +
-            fromCurrency +
+            displayData.fromCurrency +
             " = " +
-            output.toFixed(2) +
+            displayData.output.toFixed(2) +
             " " +
-            toCurrency}
-        </p>
+            displayData.toCurrency}
+        </p>{" "}
       </div>
     </>
   );
