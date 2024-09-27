@@ -15,7 +15,6 @@ export const CurrencyConverter = () => {
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("CHF");
   const [amount, setAmount] = useState(1);
-  // const [output, setOutput] = useState(0);
 
   const [displayData, setDisplayData] = useReducer(reducerFn, {
     fromCurrency,
@@ -33,11 +32,7 @@ export const CurrencyConverter = () => {
   }, []);
 
   const convertCurrenciesHandler = async () => {
-    const convertedCurrency = await convertCurrencies(
-      fromCurrency,
-      toCurrency,
-      amount
-    );
+    const convertedCurrency = await convertCurrencies("EGP", "SAR", "amount");
     setDisplayData({
       fromCurrency,
       toCurrency,
