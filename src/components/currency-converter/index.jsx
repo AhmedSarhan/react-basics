@@ -15,6 +15,7 @@ export const CurrencyConverter = () => {
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("CHF");
   const [amount, setAmount] = useState(1);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const [displayData, setDisplayData] = useReducer(reducerFn, {
     fromCurrency,
@@ -23,8 +24,13 @@ export const CurrencyConverter = () => {
     output: 0,
   });
   const getCurrenciesHandler = async () => {
-    const apiCurrencies = await getCurrencies();
-    setCurrencies(apiCurrencies);
+    try {
+      setErrorMessage(null);
+      const apiCurrencies = await getCurrencies();
+      setCurrencies(apiCurrencies);
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
 
   useEffect(() => {
@@ -32,13 +38,36 @@ export const CurrencyConverter = () => {
   }, []);
 
   const convertCurrenciesHandler = async () => {
-    const convertedCurrency = await convertCurrencies("EGP", "SAR", "amount");
-    setDisplayData({
-      fromCurrency,
-      toCurrency,
-      input: amount,
-      output: convertedCurrency,
-    });
+    try {
+      if (isNaN(Number(amount))) {
+        throw new Error("pls enter a valid number in amount.");
+      }
+      const response = await convertCurrencies(
+        fromCurrency,
+        toCurrency,
+        amount
+      );
+      const rate = response?.data?.data?.[toCurrency];
+
+      const convertedCurrency = rate * amount;
+      setDisplayData({
+        fromCurrency,
+        toCurrency,
+        input: amount,
+        output: convertedCurrency,
+      });
+    } catch (error) {
+      let errMsg; 
+      if (error.response) {
+        errMsg = Object.values(error?.response?.data?.errors)
+          ?.map((item) => item[0])
+          ?.join(" ");
+      } else {
+        errMsg = error.message
+      }
+      setErrorMessage(errMsg);
+
+    }
   };
 
   return (
@@ -98,6 +127,7 @@ export const CurrencyConverter = () => {
           </div>
         </div>
         <button onClick={convertCurrenciesHandler}>Convert</button>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </div>
       <div className={styles.result}>
         <h2>Converted Amount:</h2>
