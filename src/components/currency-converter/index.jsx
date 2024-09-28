@@ -27,7 +27,7 @@ export const CurrencyConverter = () => {
     try {
       setErrorMessage(null);
       const apiCurrencies = await getCurrencies();
-      setCurrencies(apiCurrencies);
+      setCurrencies(null);
     } catch (error) {
       setErrorMessage(error.message);
     }
