@@ -7,8 +7,12 @@ import ErrorBoundary from "./components/error-boundary/index.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <ErrorBoundary>
       <Header />
+    </ErrorBoundary>
 
+    <ErrorBoundary>
       <App />
+    </ErrorBoundary>
   </StrictMode>
 );
