@@ -1,0 +1,59 @@
+
+.recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.recipe-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-card:hover {
+    transform: scale(1.03);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.recipe-card h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.card-content {
+    padding: 16px;
+    flex-grow: 1;
+}
+
+
+
+.recipe-card p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.tags {
+    font-size: 12px;
+    color: #888;
+}
+
+.rating {
+    font-weight: bold;
+}
+
+.servings,
+.calories {
+    color: #666;
+}
