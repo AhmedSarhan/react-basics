@@ -1,9 +1,8 @@
-import React from 'react'
 import { RecipeCard } from "./recipe-card";
 
 import styles from "./recipes.module.css";
 
-const RecipesList = ({recipes}) => {
+export const RecipesList = ({recipes}) => {
   return (
     <ul className={styles["recipe-list"]}>
       {recipes.map((recipe) => (
@@ -13,4 +12,3 @@ const RecipesList = ({recipes}) => {
   );
 }
 
-export default RecipesList

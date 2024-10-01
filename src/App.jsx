@@ -1,27 +1,44 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import { AboutPage } from "./pages/about";
-import { ContactPage } from "./pages/contact-us";
-import { HomePage } from "./pages/home";
-import { SingleRecipe } from "./pages/home/single-recipe";
+import React from "react";
+import { RecipesList } from "./components/recipes/recipes-list";
+import { fetchRecipes } from "./api/fetch-recipes";
 
-function App() {
-  const [shownScreen, setShownScreen] = useState("home");
-  useEffect(() => {
-    const url = window.location.href;
-    const path = url.split("/").pop();
-    const shownScreen = path === "" ? "home" : path;
-    console.log(shownScreen);
-    setShownScreen(shownScreen);
+export const App = () => {
+  const [recipes, setRecipes] = React.useState([]);
+
+  const fetchRecipesHandler = async () => {
+    try {
+      const recipes = await fetchRecipes({limit: 10});
+      setRecipes(recipes || []);
+    } catch (error) {
+      console.error("fetchRecipes -> error", error);
+    }
+  };
+
+  React.useEffect(() => {
+    
+    fetchRecipesHandler();
   }, []);
+
   return (
     <div className="app">
-      {shownScreen === "home" && <HomePage />}
-      {!isNaN(Number(shownScreen)) && <SingleRecipe />}
-      {shownScreen === "about" && <AboutPage />}
-      {shownScreen === "contact" && <ContactPage />}
+      <h1 style={{ textAlign: "center" }}>Performance in React</h1>
+      <h2 style={{ textAlign: "center" }}>Enter React useCallback</h2>
+
+      <RecipesList recipes={recipes} />
+      <div style={{
+        display: 'flex',
+        gap: '1rem',
+        justifyContent: 'center'
+      }}>
+        <label htmlFor="limit">Choose Limit</label>
+        <select name="limit">
+          <option>5</option>
+          <option>10</option>
+          <option>15</option>
+          <option>25</option>
+          <option>50</option>
+        </select>
+      </div>
     </div>
   );
-}
-
-export default App;
+};

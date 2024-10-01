@@ -1,22 +1,11 @@
 import { Axios } from ".";
 
-export const fetchRecipes = async () => {
+export const fetchRecipes = async ({limit}) => {
   try {
-    const response = await Axios.get("/recipes?limit=10");
+    const response = await Axios.get(`/recipes?limit=${limit}`);
     return response.data?.recipes || [];
   } catch (error) {
     console.error("fetchRecipes -> error", error);
     return [];
-  }
-}
-
-
-export const fetchRecipe = async (id) => {
-  try {
-    const response = await Axios.get(`/recipes/${id}`);
-    return response.data || {};
-  } catch (error) {
-    console.error("fetchRecipe -> error", error);
-    return {};
   }
 }

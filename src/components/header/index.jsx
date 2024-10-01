@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './index.module.css';
 export const Header = () => {
   
@@ -8,13 +7,13 @@ export const Header = () => {
       <nav>
         <ul>
           <li>
-            <a href="/">Home</a>
+            Home
           </li>
           <li>
-            <a href="/about">About</a>
+            About
           </li>
           <li>
-            <a href="/contact">Contact</a>
+            Contact
           </li>
         </ul>
       </nav>
