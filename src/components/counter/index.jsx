@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 
 export const Counter = () => {
   const [count, setCount] = useState(0);
@@ -11,7 +11,9 @@ export const Counter = () => {
   );
 };
 
-export const SecondCounter = () => {
+export const MemoizedCounter = memo(Counter)
+
+export const SecondCounter = memo(function SecondCounter() {
   const [count, setCount] = useState(0);
   console.log("Rendering 2nd Counter...");
   return (
@@ -22,4 +24,4 @@ export const SecondCounter = () => {
       </button>
     </div>
   );
-};
+});

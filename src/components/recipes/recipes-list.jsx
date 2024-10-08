@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { RecipeCard } from "./recipe-card";
 
 import styles from "./recipes.module.css";
@@ -15,3 +16,5 @@ export const RecipesList = ({recipes}) => {
     </ul>
   );
 }
+
+export const MemoizedRecipeList = memo(RecipesList)

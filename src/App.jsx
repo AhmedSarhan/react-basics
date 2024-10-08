@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useMemo } from "react";
-import { RecipesList } from "./components/recipes/recipes-list";
+import { RecipesList, MemoizedRecipeList } from "./components/recipes/recipes-list";
 import { fetchRecipes } from "./api/fetch-recipes";
 import "./App.css";
-import { Counter, SecondCounter } from "./components/counter";
-import { Pagination } from "./components/pagination";
+import { Counter, SecondCounter, MemoizedCounter, } from "./components/counter";
+import { Pagination, MemoizedPagination } from "./components/pagination";
 export const App = () => {
   const [recipes, setRecipes] = React.useState([]);
   const [limit, setLimit] = useState(20);
@@ -37,14 +37,14 @@ export const App = () => {
           alignItems: "center",
         }}
       >
-        <Counter />
+        <MemoizedCounter />
 
         <SecondCounter />
       </div>
-      <Pagination limit={limit} setLimit={setLimit} />
+      <MemoizedPagination limit={limit} setLimit={setLimit} />
       <button onClick={fetchRecipesHandler}>Fetch Manually</button>
 
-      <RecipesList recipes={sortedRecipes} />
+      <MemoizedRecipeList recipes={sortedRecipes} />
     </div>
   );
 };

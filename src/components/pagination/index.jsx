@@ -1,3 +1,4 @@
+import {memo} from 'react'
 
 export const Pagination = ({
   limit,
@@ -32,3 +33,5 @@ export const Pagination = ({
 }
 
 
+// export default memo(Pagination)
+export const MemoizedPagination = memo(Pagination)
