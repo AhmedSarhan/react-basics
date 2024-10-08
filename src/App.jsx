@@ -1,10 +1,11 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { RecipesList } from "./components/recipes/recipes-list";
 import { fetchRecipes } from "./api/fetch-recipes";
 import "./App.css";
 export const App = () => {
   const [recipes, setRecipes] = React.useState([]);
   const [limit, setLimit] = useState(20);
+  const [count, setCount] = useState(0)
   const fetchRecipesHandler = useCallback(async () => {
     try {
       const recipes = await fetchRecipes({ limit });
@@ -14,7 +15,15 @@ export const App = () => {
     }
   }, [limit]);
   
-
+  // const sortedRecipes = () => {
+  //   console.log("sorting recipes without memo...");
+  //   return [...recipes].sort((a, b) => a.name.localeCompare(b.name));
+  // };
+  
+  const sortedRecipes = useMemo(() => {
+    console.log("sorting recipes...");
+    return [...recipes].sort((a, b) => a.name.localeCompare(b.name));
+  }, [recipes]);
  
   React.useEffect(() => {
     fetchRecipesHandler();
@@ -22,9 +31,12 @@ export const App = () => {
 
   return (
     <div className="app">
-      
+      <div>
+        <h2>Count: {count}</h2>
+        <button onClick={() => setCount((prev) => prev + 1)}>Increment</button>
+      </div>
       <h1 style={{ textAlign: "center" }}>Performance in React</h1>
-      <h2 style={{ textAlign: "center" }}>Enter React useCallback</h2>
+      <h2 style={{ textAlign: "center" }}>Enter React useMemo</h2>
       <div
         style={{
           display: "flex",
@@ -48,7 +60,8 @@ export const App = () => {
       </div>
       <button onClick={fetchRecipesHandler}>Fetch Manually</button>
 
-      <RecipesList recipes={recipes} />
+      {/* <RecipesList recipes={sortedRecipes()} /> */}
+      <RecipesList recipes={sortedRecipes} />
     </div>
   );
 };
