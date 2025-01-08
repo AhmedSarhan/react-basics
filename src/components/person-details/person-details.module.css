@@ -1,0 +1,30 @@
+.person-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  gap: 5px;
+  /* justify-content: center; */
+}
+
+.form-group label {
+  text-align: start;
+}
+
+.form-group input {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+}
+
+.form-group input:focus {
+  outline: none;
+  border: 1px solid #ccc;
+}

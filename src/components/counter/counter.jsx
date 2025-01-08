@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-
+import styles from "./counter.module.css";
 export const Counter = () => {
-  const [count, setCount] = useState(0);
+  let [count, setCount] = useState(0);
+  // let count = 0;
+  const incrementHandler = () => {
+    // let newCount = count + 1;
+    setCount(count + 1);
+  };
   return (
-    <button onClick={() => setCount((count) => count + 1)}>
-      count is {count}
-    </button>
+    <div className={styles["counter"]}>
+      <button onClick={incrementHandler}>Increment by 5</button>
+      <button onClick={incrementHandler}>Increment is {count}</button>
+      <span>{count}</span>
+      <button onClick={incrementHandler}>Decrement</button>
+      <button onClick={incrementHandler}>Decrement by 5</button>
+    </div>
   );
 };

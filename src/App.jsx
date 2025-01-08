@@ -6,6 +6,7 @@ import { PersonDetails } from "./components/person-details/person-details";
 import { PersonAgeCertificate } from "./components/person-details/person-age-certificate";
 
 import "./App.css";
+import { PersonDetailsForm } from "./components/person-details/person-details-form";
 
 const movies = [
   {
@@ -47,13 +48,13 @@ const App = () => {
     <Fragment>
       <div className="container">
         <Counter />
-        <Counter />
         <div className="list">
           {movies.map((movie, index) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
         <div>
+          <PersonDetailsForm />
           <PersonDetails person={person} />
         </div>
         <div>
