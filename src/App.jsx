@@ -16,6 +16,7 @@ const movies = [
     release: "2021",
     length: "2h 28min",
     genres: ["Action", "Adventure", "Fantasy"],
+    rating: 3,
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const movies = [
     release: "2022",
     length: "2h 55min",
     genres: ["Action", "Crime", "Drama"],
+    rating: 4,
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ const movies = [
     release: "2021",
     length: "2h 28min",
     genres: ["Action", "Sci-Fi"],
+    rating: 5,
   },
 ];
 const person = {
