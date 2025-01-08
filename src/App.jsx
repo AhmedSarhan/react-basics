@@ -25,16 +25,18 @@ const movies = [
     genres: ["Action", "Sci-Fi"],
   },
 ];
+const person = {
+  name: "John",
+  age: 25,
+};
 const App = () => {
   const [count, setCount] = useState(0);
 
   return (
     <Fragment>
-      {/* <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div> */}
+      <button onClick={() => setCount((count) => count + 1)}>
+        count is {count}
+      </button>
       <div className="list">
         {movies.map((movie) => (
           <div className="card">
@@ -47,6 +49,18 @@ const App = () => {
             <p>{movie.genres.join(", ")}</p>
           </div>
         ))}
+      </div>
+      <div>
+        <h2>
+          Person is called {person.name} and he is {person.age} years old
+        </h2>
+      </div>
+      <div>
+        {person.age > 18 ? (
+          <h2>Person is an adult</h2>
+        ) : (
+          <h2>Person is not an adult</h2>
+        )}
       </div>
     </Fragment>
   );
