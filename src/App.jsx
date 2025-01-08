@@ -1,7 +1,15 @@
-import { useState, Fragment } from "react";
+import { Fragment } from "react";
+import { Counter } from "./components/counter/counter";
+
+import { MovieCard } from "./components/movies/movie-card";
+import { PersonDetails } from "./components/person-details/person-details";
+import { PersonAgeCertificate } from "./components/person-details/person-age-certificate";
+
 import "./App.css";
+
 const movies = [
   {
+    id: 1,
     image:
       "https://www.sonypictures.ca/sites/canada/files/2022-12/DP_6390172_SpiderMan_NoWayHome_2000x3000_EST_1333x2000_thumbnail-min-min.jpg",
     title: "Spider-man: No Way Home",
@@ -10,6 +18,7 @@ const movies = [
     genres: ["Action", "Adventure", "Fantasy"],
   },
   {
+    id: 2,
     image: "https://i.redd.it/xe73a62eq0n81.jpg",
     title: "The Batman",
     release: "2022",
@@ -17,6 +26,7 @@ const movies = [
     genres: ["Action", "Crime", "Drama"],
   },
   {
+    id: 3,
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu0yJ6jMU5CB7693rX-tgGuTwXwP6kFhc3Q&s",
     title: "The Matrix Resurrections",
@@ -27,40 +37,25 @@ const movies = [
 ];
 const person = {
   name: "John",
-  age: 25,
+  age: 17,
 };
 const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
     <Fragment>
-      <button onClick={() => setCount((count) => count + 1)}>
-        count is {count}
-      </button>
-      <div className="list">
-        {movies.map((movie) => (
-          <div className="card">
-            <img src={movie.image} alt={movie.title} width={200} height={300} />
-            <h3>{movie.title}</h3>
-            <div className="length_release">
-              <p>{movie.release}</p>
-              <p>{movie.length}</p>
-            </div>
-            <p>{movie.genres.join(", ")}</p>
-          </div>
-        ))}
-      </div>
-      <div>
-        <h2>
-          Person is called {person.name} and he is {person.age} years old
-        </h2>
-      </div>
-      <div>
-        {person.age > 18 ? (
-          <h2>Person is an adult</h2>
-        ) : (
-          <h2>Person is not an adult</h2>
-        )}
+      <div className="container">
+        <Counter />
+        <Counter />
+        <div className="list">
+          {movies.map((movie, index) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </div>
+        <div>
+          <PersonDetails person={person} />
+        </div>
+        <div>
+          <PersonAgeCertificate isAdult={person.age > 18} />
+        </div>
       </div>
     </Fragment>
   );
