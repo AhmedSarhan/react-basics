@@ -1,5 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Counter } from "./components/counter/counter";
+import Person_Data from "./assets/data/person.json";
 
 import { MovieCard } from "./components/movies/movie-card";
 import { PersonDetails } from "./components/person-details/person-details";
@@ -39,15 +40,30 @@ const movies = [
     rating: 5,
   },
 ];
-// const person = {
-//   name: "John",
-//   age: 17,
-// };
+
 const App = () => {
   const [person, setPerson] = useState({
     name: "",
     age: 0,
   });
+  useEffect(() => {
+    console.log("useEffect hook ran");
+    setPerson(Person_Data);
+  }, []);
+
+  useEffect(() => {
+    console.log("this effect ran");
+    const handler = setTimeout(() => {
+      if (person.age < 18) {
+        alert("this person is underage");
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [person.age]);
+
   return (
     <Fragment>
       <div className="container">
@@ -76,16 +92,3 @@ const App = () => {
 };
 
 export default App;
-
-/* 
-  1. display person name input in the person details
-  2. display person age input in the person details
-  3. display whether the person is adult or not based on person details
-  4. hide / show person age certificate message based on do we have an age or not (Bonus) ✅
-
-
-  hints:
-  1. input have props / attributes: value, onChange
-  2. useConditionalRendering
-  3. use props
-*/
