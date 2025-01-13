@@ -68,15 +68,15 @@ const App = () => {
     <Fragment>
       <div className="container">
         <h1>React Basics Course</h1>
-        <h3 style={{ marginBlock: "5px" }}>useEffect explained</h3>
+        <h3 style={{ marginBlock: "5px" }}>useEffect exercise</h3>
         <Counter />
-        <div className="list">
+        {/* <div className="list">
           {movies.map((movie, index) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
-        </div>
+        </div> */}
 
-        <div style={{ marginBlock: "20px" }}>
+        {/* <div style={{ marginBlock: "20px" }}>
           <PersonDetailsForm person={person} setPerson={setPerson} />
           {Boolean(person?.name || person.age) && (
             <PersonDetails person={person} />
@@ -85,7 +85,7 @@ const App = () => {
 
         <div>
           {!!person.age && <PersonAgeCertificate isAdult={person.age >= 18} />}
-        </div>
+        </div> */}
       </div>
     </Fragment>
   );
