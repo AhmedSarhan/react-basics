@@ -1,4 +1,5 @@
 import styles from "./movies.module.css";
+
 export const MovieCard = ({ movie }) => {
   return (
     <div

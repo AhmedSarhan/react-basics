@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Counter } from "./components/counter/counter";
 
 import { MovieCard } from "./components/movies/movie-card";
@@ -39,26 +39,36 @@ const movies = [
     rating: 5,
   },
 ];
-const person = {
-  name: "John",
-  age: 17,
-};
+// const person = {
+//   name: "John",
+//   age: 17,
+// };
 const App = () => {
+  const [person, setPerson] = useState({
+    name: "",
+    age: 0,
+  });
   return (
     <Fragment>
       <div className="container">
+        <h1>React Basics Course</h1>
+        <h3 style={{ marginBlock: "5px" }}>useEffect explained</h3>
         <Counter />
         <div className="list">
           {movies.map((movie, index) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
-        <div>
-          <PersonDetailsForm />
-          <PersonDetails person={person} />
+
+        <div style={{ marginBlock: "20px" }}>
+          <PersonDetailsForm person={person} setPerson={setPerson} />
+          {Boolean(person?.name || person.age) && (
+            <PersonDetails person={person} />
+          )}
         </div>
+
         <div>
-          <PersonAgeCertificate isAdult={person.age > 18} />
+          {!!person.age && <PersonAgeCertificate isAdult={person.age >= 18} />}
         </div>
       </div>
     </Fragment>
@@ -71,7 +81,7 @@ export default App;
   1. display person name input in the person details
   2. display person age input in the person details
   3. display whether the person is adult or not based on person details
-  4. hide / show person age certificate message based on do we have an age or not (Bonus)
+  4. hide / show person age certificate message based on do we have an age or not (Bonus) ✅
 
 
   hints:
