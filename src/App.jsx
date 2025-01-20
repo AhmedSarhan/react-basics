@@ -2,6 +2,7 @@ import { Fragment, useLayoutEffect, useRef } from "react";
 
 import "./App.css";
 import { FormWState } from "./components/forms-in-react/form-w-state";
+import { FormWRef } from "./components/forms-in-react/form-w-ref";
 
 const App = () => {
   const headlineRef = useRef();
@@ -17,7 +18,8 @@ const App = () => {
       <div className="container">
         <h1 ref={headlineRef}>React Basics Course</h1>
         <h3 style={{ fontSize: "35px", marginBlock: "5px" }}>Forms in React</h3>
-        <FormWState />
+        {/* <FormWState /> */}
+        <FormWRef />
       </div>
     </Fragment>
   );
