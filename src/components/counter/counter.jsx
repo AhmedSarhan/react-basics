@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./counter.module.css";
 export const Counter = () => {
   let [count, setCount] = useState(0);
@@ -10,22 +10,23 @@ export const Counter = () => {
     // setCount((prevCount) => prevCount + value);
   };
 
+  const interval = useRef(null);
   useEffect(() => {
-    const interval = setInterval(() => {
+    interval.current = setInterval(() => {
       incrementHandler();
     }, 1000);
 
     if (count >= 50) {
-      clearInterval(interval);
+      clearInterval(interval.current);
     }
     return () => {
-      clearInterval(interval);
+      clearInterval(interval.current);
     };
   }, [count]);
 
   const stopHandler = () => {
     // ToDo: fix this
-    // clearInterval(interval)
+    clearInterval(interval.current);
   };
   const clearHandler = () => {
     setCount(0);

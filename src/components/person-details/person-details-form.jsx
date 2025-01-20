@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./person-details.module.css";
 export const PersonDetailsForm = ({ person, setPerson }) => {
   console.log("person", person);

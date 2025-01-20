@@ -1,9 +1,10 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import React, { forwardRef } from "react";
 
-export const PersonAgeCertificate = ({ isAdult }) => {
+export const PersonAgeCertificate = forwardRef(({ isAdult }, ref) => {
   return (
     <div className="card">
-      {isAdult ? <h2>Person is an adult</h2> : <h2>Person is not an adult</h2>}
+      <h2 ref={ref}></h2>
     </div>
   );
-};
+});

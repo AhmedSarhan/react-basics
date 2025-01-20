@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Counter } from "./components/counter/counter";
 import Person_Data from "./assets/data/person.json";
 
@@ -42,6 +42,10 @@ const movies = [
 ];
 
 const App = () => {
+  const headlineRef = useRef();
+  console.log("headlineRef", headlineRef);
+  const firstRender = useRef(true);
+  const ageCertificateRef = useRef();
   const [person, setPerson] = useState({
     name: "",
     age: 0,
@@ -51,11 +55,30 @@ const App = () => {
     setPerson(Person_Data);
   }, []);
 
+  useLayoutEffect(() => {
+    headlineRef.current.style.backgroundColor = "red";
+    headlineRef.current.style.padding = "5px";
+    headlineRef.current.innerText = "React Basics course with قعدة نقاشين";
+  }, []);
+
   useEffect(() => {
+    console.log("this effect condition ran", person.age);
+
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
     console.log("this effect ran");
     const handler = setTimeout(() => {
       if (person.age < 18) {
+        if (ageCertificateRef.current) {
+          ageCertificateRef.current.innerText = "Person is underage";
+        }
         alert("this person is underage");
+        return;
+      }
+      if (ageCertificateRef.current) {
+        ageCertificateRef.current.innerText = "person is adult";
       }
     }, 1000);
 
@@ -67,16 +90,16 @@ const App = () => {
   return (
     <Fragment>
       <div className="container">
-        <h1>React Basics Course</h1>
-        <h3 style={{ marginBlock: "5px" }}>useEffect exercise</h3>
+        <h1 ref={headlineRef}>React Basics Course</h1>
+        <h3 style={{ marginBlock: "5px" }}>useRef Introduced</h3>
         <Counter />
-        {/* <div className="list">
+        <div className="list">
           {movies.map((movie, index) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
-        </div> */}
+        </div>
 
-        {/* <div style={{ marginBlock: "20px" }}>
+        <div style={{ marginBlock: "20px" }}>
           <PersonDetailsForm person={person} setPerson={setPerson} />
           {Boolean(person?.name || person.age) && (
             <PersonDetails person={person} />
@@ -84,8 +107,8 @@ const App = () => {
         </div>
 
         <div>
-          {!!person.age && <PersonAgeCertificate isAdult={person.age >= 18} />}
-        </div> */}
+          {!!person.age && <PersonAgeCertificate ref={ageCertificateRef} />}
+        </div>
       </div>
     </Fragment>
   );
