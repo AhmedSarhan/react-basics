@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import styles from "./index.module.css";
 
+const initialData = {
+  name: "",
+  email: "",
+  age: "",
+  password: "",
+};
+const reducerFn = (prevState, newState) => {
+  return {
+    ...prevState,
+    ...newState,
+  };
+};
 export const FormWState = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [password, setPassword] = useState("");
-
+  // const [formData, setFormData] = useState(initialData);
+  const [formData, setFormData] = useReducer(
+    reducerFn,
+    null,
+    () => initialData
+  );
   const submitFormHandler = (e) => {
     e.preventDefault();
-    console.log("formData", name, email, age, password);
+    console.log("formData", formData);
+  };
+
+  const inputChangeHandler = (event) => {
+    // setFormData((prevFormData) => ({
+    //   ...prevFormData,
+    //   [event.target.name]: event.target.value,
+    // }));
+    setFormData({
+      [event.target.name]: event.target.value,
+    });
   };
   return (
     <>
@@ -19,8 +42,8 @@ export const FormWState = () => {
           <input
             type="text"
             name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formData.name}
+            onChange={inputChangeHandler}
           />
         </div>
         <div className={styles["form-group"]}>
@@ -28,8 +51,8 @@ export const FormWState = () => {
           <input
             type="text"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={inputChangeHandler}
           />
         </div>
         <div className={styles["form-group"]}>
@@ -39,8 +62,8 @@ export const FormWState = () => {
             min={1}
             max={200}
             name="age"
-            value={age}
-            onChange={(e) => setAge(parseInt(e.target.value))}
+            value={formData.age}
+            onChange={inputChangeHandler}
           />
         </div>
         <div className={styles["form-group"]}>
@@ -48,15 +71,16 @@ export const FormWState = () => {
           <input
             type="password"
             name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formData.password}
+            onChange={inputChangeHandler}
           />
         </div>
 
         <button type="submit">Send</button>
       </form>
       <div>
-        <h3>{name}</h3>
+        <h3>{formData.name}</h3>
+        <h3>{formData.email}</h3>
       </div>
     </>
   );

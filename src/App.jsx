@@ -18,8 +18,11 @@ const App = () => {
       <div className="container">
         <h1 ref={headlineRef}>React Basics Course</h1>
         <h3 style={{ fontSize: "35px", marginBlock: "5px" }}>Forms in React</h3>
-        {/* <FormWState /> */}
-        <FormWRef />
+        <h4 style={{ fontSize: "25px", marginBlock: "5px" }}>
+          Introducing useReducer
+        </h4>
+        <FormWState />
+        {/* <FormWRef /> */}
       </div>
     </Fragment>
   );
