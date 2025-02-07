@@ -1,34 +1,17 @@
 import React, { useState, useCallback, useMemo } from "react";
-import { RecipesList, MemoizedRecipeList } from "./components/recipes/recipes-list";
+import {  MemoizedRecipeList } from "./components/recipes/recipes-list";
 import { fetchRecipes } from "./api/fetch-recipes";
 import "./App.css";
-import { Counter, SecondCounter, MemoizedCounter, } from "./components/counter";
-import { Pagination, MemoizedPagination } from "./components/pagination";
+import { SecondCounter, MemoizedCounter, } from "./components/counter";
+import {  MemoizedPagination } from "./components/pagination";
+import { useFetchRecipes } from "./hooks/use-fetch-recipes";
 export const App = () => {
-  const [recipes, setRecipes] = React.useState([]);
-  const [limit, setLimit] = useState(20);
-  const fetchRecipesHandler = useCallback(async () => {
-    try {
-      const recipes = await fetchRecipes({ limit });
-      setRecipes(recipes || []);
-    } catch (error) {
-      console.error("fetchRecipes -> error", error);
-    }
-  }, [limit]);
-
-  const sortedRecipes = useMemo(() => {
-    console.log("sorting recipes...");
-    return [...recipes].sort((a, b) => a.name.localeCompare(b.name));
-  }, [recipes]);
-
-  React.useEffect(() => {
-    fetchRecipesHandler();
-  }, [fetchRecipesHandler]);
+ const {limit, setLimit, fetchRecipesHandler, sortedRecipes} = useFetchRecipes(5)
 
   return (
     <div className="app">
-      <h1 style={{ textAlign: "center" }}>Performance in React</h1>
-      <h2 style={{ textAlign: "center" }}>Enter React Memo</h2>
+      <h1 style={{ textAlign: "center" }}>React Basics</h1>
+      <h2 style={{ textAlign: "center" }}>Custom Hooks</h2>
       <div
         style={{
           display: "flex",

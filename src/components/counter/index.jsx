@@ -1,12 +1,13 @@
-import { memo, useState } from "react";
+import { memo } from "react";
+import { useCount } from "../../hooks/use-count";
 
 export const Counter = () => {
-  const [count, setCount] = useState(0);
+  const [count, updateCount] = useCount(0);
   console.log("Rendering Counter...");
   return (
     <div>
       <h2>Count: {count}</h2>
-      <button onClick={() => setCount((prev) => prev + 1)}>Increment</button>
+      <button onClick={() => updateCount(1)}>Increment</button>
     </div>
   );
 };
@@ -14,12 +15,12 @@ export const Counter = () => {
 export const MemoizedCounter = memo(Counter)
 
 export const SecondCounter = memo(function SecondCounter() {
-  const [count, setCount] = useState(0);
+  const [count, updateCount] = useCount(0);
   console.log("Rendering 2nd Counter...");
   return (
     <div>
       <h2>Count: {count}</h2>
-      <button onClick={() => setCount((prev) => prev + 5)}>
+      <button onClick={() => updateCount(5)}>
         Increment by 5
       </button>
     </div>
